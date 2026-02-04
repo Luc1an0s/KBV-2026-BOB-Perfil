@@ -1,0 +1,30 @@
+name: Alerta de Planilha Diário
+
+on:
+  schedule:
+    # 11:00 UTC = 07:00 da manhã em Manaus
+    - cron: '0 22 * * *'
+  workflow_dispatch: # Botão para rodar na hora que quiser
+
+jobs:
+  executar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Código
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Instalar Libs
+        run: pip install gspread oauth2client requests pytz
+
+      - name: Rodar Script
+        env:
+          GOOGLE_CRED_JSON: ${{ secrets.GOOGLE_CRED_JSON }}
+          NUMEROS_WHATSAPP: ${{ secrets.NUMEROS_WHATSAPP }}
+          SHEET_ID: ${{ secrets.SHEET_ID }}
+          NOME_ABA: ${{ secrets.NOME_ABA }}
+        run: python main.py
