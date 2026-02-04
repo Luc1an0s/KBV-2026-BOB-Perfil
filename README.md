@@ -13,7 +13,7 @@ Notificação: Disparo de mensagens via API de WhatsApp (Bubble).
 Execução Agendada: Roda automaticamente todos os dias às 18:00 (Horário de Manaus) via GitHub Actions.
 
 🛠️ Tecnologias Utilizadas
-Python 3.9
+Python 3.12
 
 Gspread: Manipulação da API do Google Sheets.
 
